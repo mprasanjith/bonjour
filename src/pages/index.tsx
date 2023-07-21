@@ -85,7 +85,10 @@ const pieEmojiAnimation = {
 
 export function BouncingPieEmoji() {
   return (
-    <motion.span animate={pieEmojiAnimation} style={{ display: "inline-block" }}>
+    <motion.span
+      animate={pieEmojiAnimation}
+      style={{ display: "inline-block" }}
+    >
       🥧
     </motion.span>
   );
@@ -101,7 +104,10 @@ export function ShakingMoneyEmoji() {
   };
 
   return (
-    <motion.span animate={moneyEmojiAnimation} style={{ display: "inline-block" }}>
+    <motion.span
+      animate={moneyEmojiAnimation}
+      style={{ display: "inline-block" }}
+    >
       🤑
     </motion.span>
   );
@@ -114,13 +120,13 @@ export function Landing() {
     <div className={classes.wrapper}>
       <Container size={700} className={classes.inner}>
         <h1 className={classes.title}>
-        <ShakingMoneyEmoji />{" "}
+          <ShakingMoneyEmoji />{" "}
           <Text component="span" variant="gradient" inherit>
             Crypto
           </Text>{" "}
           made
           <br />
-          as easy as  <BouncingPieEmoji /> pie.
+          as easy as <BouncingPieEmoji /> pie.
         </h1>
         <Text className={classes.description} color="dimmed">
           We simplify crypto for everyone, while keeping it safe and secure. Own
@@ -128,9 +134,9 @@ export function Landing() {
         </Text>
         <Group className={classes.controls}>
           <Link href="/onboard">
-          <Button size="xl" className={classes.control} variant="gradient">
-            Get started
-          </Button>
+            <Button size="xl" className={classes.control} variant="gradient">
+              Get started
+            </Button>
           </Link>
         </Group>
       </Container>

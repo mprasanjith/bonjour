@@ -33,7 +33,10 @@ export default function Home() {
   }, [isInView]);
 
   async function initWallet() {
-    signIn();
+    if (!web3Auth) return;
+
+    const signInData = await web3Auth.signIn();
+    if (signInData) router.replace("/app");
   }
 
   return (

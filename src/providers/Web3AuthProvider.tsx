@@ -5,6 +5,7 @@ import { OpenloginUserInfo } from "@web3auth/openlogin-adapter";
 import {
   PropsWithChildren,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -50,10 +51,16 @@ export const Web3AuthContextProvider: React.FC<PropsWithChildren> = ({
     });
   }, [web3Auth]);
 
-  const signIn = async () => {
+  const signIn = useCallback(async () => {
     const signInData = await web3Auth?.signIn();
     setSignInData(signInData ?? null);
-  };
+  }, [web3Auth]);
+
+  useEffect(() => {
+    if (!signInData && user) {
+      signIn();
+    }
+  }, [signInData, user, signIn]);
 
   const signOut = async () => {
     await web3Auth?.signOut();
