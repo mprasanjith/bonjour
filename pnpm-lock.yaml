@@ -56,6 +56,9 @@ dependencies:
   eslint-config-next:
     specifier: 13.4.11
     version: 13.4.11(eslint@8.45.0)(typescript@5.1.6)
+  framer-motion:
+    specifier: ^10.13.0
+    version: 10.13.0(react-dom@18.2.0)(react@18.2.0)
   next:
     specifier: 13.4.11
     version: 13.4.11(react-dom@18.2.0)(react@18.2.0)
@@ -154,6 +157,19 @@ packages:
   /@emotion/hash@0.9.1:
     resolution: {integrity: sha512-gJB6HLm5rYwSLI6PQa+X1t5CFGrv1J1TWG+sOyMCeKz2ojaj6Fnl/rZEspogG+cvqbt4AE/2eIyD2QfLKTBNlQ==}
     dev: false
+
+  /@emotion/is-prop-valid@0.8.8:
+    resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}
+    requiresBuild: true
+    dependencies:
+      '@emotion/memoize': 0.7.4
+    dev: false
+    optional: true
+
+  /@emotion/memoize@0.7.4:
+    resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    dev: false
+    optional: true
 
   /@emotion/memoize@0.8.1:
     resolution: {integrity: sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==}
@@ -4763,6 +4779,24 @@ packages:
   /forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /framer-motion@10.13.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-xKhw9VCizmwEHbopOfluaoVunGHSZyMztGbTvsgOYqCjaKu6qtlwWY1J+6GhL41NY1P157JgEikjDm67XCFnvQ==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tslib: 2.6.0
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
     dev: false
 
   /fresh@0.5.2:
