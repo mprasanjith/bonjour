@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   createStyles,
   Container,
@@ -25,6 +25,8 @@ import {
 } from "@tabler/icons-react";
 import { useWeb3Auth } from "@/providers/Web3AuthProvider";
 import { useRouter } from "next/router";
+import { OpenloginUserInfo } from "@web3auth/openlogin-adapter";
+import { txServiceUrl, web3AuthConfig } from "@/lib/web3AuthModalPack";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -119,22 +121,20 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const AppNavigation: React.FC = () => {
-  const web3Auth = useWeb3Auth();
+  const { signOut, user } = useWeb3Auth();
   const router = useRouter();
   const tabs = ["Home", "Explore", "Notifications", "Messages"];
-  const user = {
-    name: "Madusha",
-    image: "",
-  };
+
+
 
   const { classes, theme, cx } = useStyles();
   const [opened, { toggle }] = useDisclosure(false);
   const [userMenuOpened, setUserMenuOpened] = useState(false);
 
-  const signOut = () => {
-    web3Auth?.signOut();
+  const signOutAndRedirect = () => {
+    signOut();
     router.push("/");
-  }
+  };
 
   const items = tabs.map((tab) => (
     <Tabs.Tab value={tab} key={tab}>
@@ -147,7 +147,7 @@ export const AppNavigation: React.FC = () => {
       <Container className={classes.mainSection}>
         <Group position="apart">
           <Text color={theme.white}>
-            Bonjour, <strong>{user.name}</strong>!
+            Bonjour, <strong>{user?.name}</strong>!
           </Text>
           <Burger
             opened={opened}
@@ -172,8 +172,8 @@ export const AppNavigation: React.FC = () => {
               >
                 <Group spacing={7}>
                   <Avatar
-                    src={user.image}
-                    alt={user.name}
+                    src={user?.profileImage}
+                    alt={user?.name}
                     radius="xl"
                     size={20}
                   />
@@ -183,7 +183,7 @@ export const AppNavigation: React.FC = () => {
                     sx={{ lineHeight: 1, color: theme.white }}
                     mr={3}
                   >
-                    {user.name}
+                    {user?.name}
                   </Text>
                   <IconChevronDown size={rem(12)} stroke={1.5} />
                 </Group>
@@ -191,62 +191,9 @@ export const AppNavigation: React.FC = () => {
             </Menu.Target>
             <Menu.Dropdown>
               <Menu.Item
-                icon={
-                  <IconHeart
-                    size="0.9rem"
-                    stroke={1.5}
-                    color={theme.colors.red[6]}
-                  />
-                }
-              >
-                Liked posts
-              </Menu.Item>
-              <Menu.Item
-                icon={
-                  <IconStar
-                    size="0.9rem"
-                    stroke={1.5}
-                    color={theme.colors.yellow[6]}
-                  />
-                }
-              >
-                Saved posts
-              </Menu.Item>
-              <Menu.Item
-                icon={
-                  <IconMessage
-                    size="0.9rem"
-                    stroke={1.5}
-                    color={theme.colors.blue[6]}
-                  />
-                }
-              >
-                Your comments
-              </Menu.Item>
-
-              <Menu.Label>Settings</Menu.Label>
-              <Menu.Item icon={<IconSettings size="0.9rem" stroke={1.5} />}>
-                Account settings
-              </Menu.Item>
-              <Menu.Item
-                icon={<IconSwitchHorizontal size="0.9rem" stroke={1.5} />}
-              >
-                Change account
-              </Menu.Item>
-              <Menu.Item icon={<IconLogout size="0.9rem" stroke={1.5} />}>
-                Logout
-              </Menu.Item>
-
-              <Menu.Divider />
-
-              <Menu.Label>Danger zone</Menu.Label>
-              <Menu.Item icon={<IconPlayerPause size="0.9rem" stroke={1.5} />}>
-                Pause subscription
-              </Menu.Item>
-              <Menu.Item
                 color="red"
                 icon={<IconTrash size="0.9rem" stroke={1.5} />}
-                onClick={signOut}
+                onClick={signOutAndRedirect}
               >
                 Sign out
               </Menu.Item>

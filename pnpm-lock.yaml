@@ -44,6 +44,9 @@ dependencies:
   '@walletconnect/types':
     specifier: ^2.9.1
     version: 2.9.1
+  '@web3auth/base':
+    specifier: ^6.1.4
+    version: 6.1.4(@babel/runtime@7.22.6)
   '@web3auth/ethereum-provider':
     specifier: ^6.1.5
     version: 6.1.5(@babel/runtime@7.22.6)

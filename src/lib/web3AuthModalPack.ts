@@ -72,8 +72,10 @@ const openloginAdapter = new OpenloginAdapter({
   },
 });
 
-const web3AuthConfig: Web3AuthConfig = {
-  txServiceUrl: "https://safe-transaction-goerli.safe.global",
+export const txServiceUrl = "https://safe-transaction-goerli.safe.global";
+
+export const web3AuthConfig: Web3AuthConfig = {
+  txServiceUrl,
 };
 
 export async function getWeb3Auth() {

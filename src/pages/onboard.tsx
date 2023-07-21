@@ -1,19 +1,21 @@
 import { useWeb3Auth } from "@/providers/Web3AuthProvider";
-import { Button, Container, Modal, Stack, Title, rem } from "@mantine/core";
+import { Button, Container, Stack, Title, rem } from "@mantine/core";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAnimate, useInView } from "framer-motion";
 
 export default function Home() {
   const router = useRouter();
-  const web3Auth = useWeb3Auth();
+  const { web3Auth, signIn, signInData } = useWeb3Auth();
 
   useEffect(() => {
+    if (signInData) router.replace("/app");
+
     web3Auth
       ?.getUserInfo()
       .then(() => router.replace("/app"))
       .catch(() => {});
-  }, [web3Auth, router]);
+  }, [web3Auth, router, signInData]);
 
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope);
@@ -31,10 +33,7 @@ export default function Home() {
   }, [isInView]);
 
   async function initWallet() {
-    if (!web3Auth) return;
-
-    const signInData = await web3Auth.signIn();
-    if (signInData) router.replace("/app");
+    signIn();
   }
 
   return (
