@@ -6,6 +6,7 @@ import {
   Group,
   rem,
 } from "@mantine/core";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -96,6 +97,7 @@ export function Landing() {
           your crypto the easy way.
         </Text>
         <Group className={classes.controls}>
+          <Link href="/onboard">
           <Button
             size="xl"
             className={classes.control}
@@ -103,6 +105,7 @@ export function Landing() {
           >
             Get started
           </Button>
+          </Link>
         </Group>
       </Container>
     </div>

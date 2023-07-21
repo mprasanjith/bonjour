@@ -1,22 +1,31 @@
-import { Button, Stack } from "@mantine/core";
+import { Button, Container, Stack, Text, Title, rem } from "@mantine/core";
+import { useState } from "react";
+
+enum OnboardingStep {
+  Bonjour,
+}
 
 export default function Home() {
+  const [step, setStep] = useState(OnboardingStep.Bonjour);
+
   return (
-    <>
-      <Stack
-        justify="flex-end"
-        h={300}
-        sx={(theme) => ({
-          backgroundColor:
-            theme.colorScheme === "dark"
-              ? theme.colors.dark[8]
-              : theme.colors.gray[0],
-        })}
-      >
-        <Button variant="outline">1</Button>
-        <Button variant="outline">2</Button>
-        <Button variant="outline">3</Button>
+    <Container>
+      <Stack justify="flex-end" h="100vh" pb="xl">
+        <Stack mb="xl">
+          <Title variant="gradient" weight={700} size={rem(62)}>
+            Bonjour!
+          </Title>
+          <Title weight={300}>Let&apos;s get started.</Title>
+        </Stack>
+        <Stack align="flex-start" py="xl">
+          <Button variant="outline" size="xl">
+            I&apos;m new to crypto
+          </Button>
+          <Button variant="outline" size="xl">
+            I already have a wallet
+          </Button>
+        </Stack>
       </Stack>
-    </>
+    </Container>
   );
 }

@@ -19,6 +19,7 @@ export default function App(props: AppProps) {
           /** Put your mantine theme override here */
           colorScheme: 'light',
           fontFamily: '"Fira Sans", sans-serif',
+          primaryColor: 'cyan',
           defaultGradient: { from: '#2af598', to: '#009efd', deg: 120 }
         }}
       >
