@@ -1,6 +1,7 @@
-import { AppProps } from 'next/app';
-import Head from 'next/head';
-import { MantineProvider } from '@mantine/core';
+import { AppProps } from "next/app";
+import Head from "next/head";
+import { MantineProvider } from "@mantine/core";
+import { Web3AuthContextProvider } from "@/providers/Web3AuthProvider";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -9,7 +10,10 @@ export default function App(props: AppProps) {
     <>
       <Head>
         <title>Page title</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
+        />
       </Head>
 
       <MantineProvider
@@ -17,13 +21,15 @@ export default function App(props: AppProps) {
         withNormalizeCSS
         theme={{
           /** Put your mantine theme override here */
-          colorScheme: 'light',
+          colorScheme: "light",
           fontFamily: '"Fira Sans", sans-serif',
-          primaryColor: 'cyan',
-          defaultGradient: { from: '#2af598', to: '#009efd', deg: 120 }
+          primaryColor: "cyan",
+          defaultGradient: { from: "#2af598", to: "#009efd", deg: 120 },
         }}
       >
-        <Component {...pageProps} />
+        <Web3AuthContextProvider>
+          <Component {...pageProps} />
+        </Web3AuthContextProvider>
       </MantineProvider>
     </>
   );
