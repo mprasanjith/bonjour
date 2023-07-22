@@ -41,26 +41,8 @@ export default function Home() {
       <Container>
         <Stack justify="flex-end" h="100vh" pb="xl">
           <Title variant="gradient" weight={700} size={rem(62)}>
-            {smartAccount
-              ? `Let's get you funded.`
-              : "Creating your new account..."}
+            Hold on...
           </Title>
-          {smartAccount && (
-            <Title weight={300}>
-              Send funds. We would have an easy way to fund your wallet in the
-              future.
-            </Title>
-          )}
-
-          {smartAccount && (
-            <Stack align="flex-start" py="xl">
-              <Link href="/app">
-                <Button variant="outline" size="xl">
-                  Continue
-                </Button>
-              </Link>
-            </Stack>
-          )}
         </Stack>
       </Container>
     );

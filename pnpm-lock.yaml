@@ -23,6 +23,9 @@ dependencies:
   '@biconomy/paymaster':
     specifier: 3.0.0-alpha.0
     version: 3.0.0-alpha.0
+  '@biconomy/transak':
+    specifier: 3.0.0-alpha.0
+    version: 3.0.0-alpha.0
   '@biconomy/web3-auth':
     specifier: 3.0.0-alpha.0
     version: 3.0.0-alpha.0(@babel/runtime@7.22.6)(hardhat@2.17.0)
@@ -264,6 +267,12 @@ packages:
 
   /@biconomy/paymaster@3.0.0-alpha.0:
     resolution: {integrity: sha512-spdx9cs0CF34YpcFpMBNl6ks14+7Dy2wiqGN5qBvrCepZyuyfsd6RD1DqC4Lwr7E8OsxpljPkTv0kNzfPF4NXg==}
+    dev: false
+
+  /@biconomy/transak@3.0.0-alpha.0:
+    resolution: {integrity: sha512-iX3vIdE44psCUJnosExrnaEVObr/PQ9Vt+fj2w4zbrCvNElA36ugCx5wSaWDvR2NNTAw24gzfxSjaf/YmRgxpg==}
+    dependencies:
+      '@transak/transak-sdk': 1.3.0
     dev: false
 
   /@biconomy/web3-auth@3.0.0-alpha.0(@babel/runtime@7.22.6)(hardhat@2.17.0):
@@ -2528,6 +2537,14 @@ packages:
 
   /@toruslabs/tweetnacl-js@1.0.4:
     resolution: {integrity: sha512-h8fVemW5pstsKbm/fTx+y61dZkh5Pepy/92lsyKp83KErf96jT+w4LGx4nEgeAVrdYQDTLg2tO7vu/boEb23Iw==}
+    dev: false
+
+  /@transak/transak-sdk@1.3.0:
+    resolution: {integrity: sha512-XTKnM1OhB6r/TFkMIPczukACUUq41E5hF4cnQ6+Jn6iIjHqLgC7a4yrNlHMI2swv6yNPT0yCd2dGVUfNCjMGIQ==}
+    dependencies:
+      events: 3.3.0
+      query-string: 6.13.5
+      request: 2.88.2
     dev: false
 
   /@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(ethers@5.7.2)(typechain@8.3.0)(typescript@5.1.6):
