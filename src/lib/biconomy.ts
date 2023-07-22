@@ -31,13 +31,10 @@ export async function createAccount(signer: Signer) {
     biconomySmartAccountConfig
   );
   biconomySmartAccount = await biconomySmartAccount.init();
-  console.log("owner: ", biconomySmartAccount.owner);
-  console.log("address: ", await biconomySmartAccount.getSmartAccountAddress());
   return biconomySmartAccount;
 }
 
 export async function getSocialLogin() {
-  console.log("document", document)
   // create an instance of SocialLogin
   const socialLogin = new SocialLogin();
 
