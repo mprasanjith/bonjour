@@ -22,6 +22,7 @@ interface Web3AuthContextType {
   provider?: any;
   address?: string;
   smartAccount?: BiconomySmartAccount | null;
+  smartAccountAddress?: string;
   signIn: () => void;
   signOut: () => void;
   setupSmartAccount: () => void;
@@ -33,6 +34,7 @@ const Web3AuthContext = createContext<Web3AuthContextType>({
   provider: null,
   address: "",
   smartAccount: null,
+  smartAccountAddress: "",
   signIn: () => {},
   signOut: () => {},
   setupSmartAccount: () => {},

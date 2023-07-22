@@ -1,9 +1,31 @@
+import useQuery from "@/lib/airstack";
+import { useBalance } from "@/lib/covalent";
 import { useWeb3Auth } from "@/providers/Web3AuthProvider";
-import { Paper, Button, Stack, Title, Text } from "@mantine/core";
-import Link from "next/link";
+import chain from "@/utils/chains";
+import { Paper, Stack, Title, Text } from "@mantine/core";
+
+const query = `
+query WalletBalances($address: Identity!) {
+  Wallet(input: {identity: $address, blockchain: polygon}) {
+    identity
+    tokenBalances {
+      amount
+      tokenType
+      formattedAmount
+      token {
+        address
+        name
+      }
+    }
+  }
+}`;
 
 const WalletBalance: React.FC = () => {
-  const { addresses } = useWeb3Auth();
+  const { address } = useWeb3Auth();
+  const { data, total } = useBalance(chain.chainId, address);
+
+  console.log({ data, total });
+
   return (
     <Paper
       p="xl"
@@ -20,7 +42,9 @@ const WalletBalance: React.FC = () => {
     >
       <Stack justify="space-between">
         <Text>Your balance</Text>
-        <Title variant="h1" p="0" m="0">$100.56</Title>
+        <Title variant="h1" p="0" m="0">
+          ${total}
+        </Title>
 
         {/* <Link href="/app/transactions">
           <Button
