@@ -1,21 +1,63 @@
 import { useWeb3Auth } from "@/providers/Web3AuthProvider";
 import { Button, Container, Stack, Title, rem } from "@mantine/core";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAnimate, useInView } from "framer-motion";
+import { getEthAdapter } from "@/lib/safeEthersAdapter";
+import { SafeFactory } from "@safe-global/protocol-kit";
+import { deploySafe, predictSafeAddress } from "@/lib/safeFactory";
+import AccountAbstraction from "@safe-global/account-abstraction-kit-poc";
+import { ethers } from "ethers";
+import relayKit from "@/lib/gelatoRelay";
+import { getSafeAA } from "@/lib/safeAA";
 
 export default function Home() {
   const router = useRouter();
-  const { web3Auth, signIn, signInData } = useWeb3Auth();
+  const { user, addresses, web3Auth, signIn } = useWeb3Auth();
+  const [isInitializingSafe, setIsInitializingSafe] = useState(false);
 
   useEffect(() => {
-    if (signInData) router.replace("/app");
+    if (!user) return;
 
-    web3Auth
-      ?.getUserInfo()
-      .then(() => router.replace("/app"))
-      .catch(() => {});
-  }, [web3Auth, router, signInData]);
+    if (addresses?.safes?.length) {
+      router.replace("/fund");
+      return;
+    }
+
+    async function initializeSafe() {
+      console.log("initializeSafe", web3Auth);
+      const web3AuthProvider = web3Auth?.getProvider();
+      if (!web3AuthProvider) {
+        throw new Error("No provider found");
+      }
+
+      const web3Provider = new ethers.providers.Web3Provider(web3AuthProvider);
+      const signer = web3Provider.getSigner();
+
+      const safeAA = await getSafeAA(signer);
+      const predictedSafeAddress = await safeAA.getSafeAddress();
+      console.log({ predictedSafeAddress });
+
+      const isSafeDeployed = await safeAA.isSafeDeployed();
+      console.log({ isSafeDeployed });
+
+      const ethAdapter = getEthAdapter(signer);
+      const safeAddress = await predictSafeAddress(ethAdapter);
+      console.log("safe", safeAddress);
+
+      // setIsInitializingSafe(true);
+      // const provider = web3Auth?.getProvider();
+      // console.log("provider", provider);
+      // if (!provider) {
+      //   throw new Error("No provider found");
+      // }
+      // await deploySafe(ethersAdapter);
+
+      // setIsInitializingSafe(false);
+    }
+
+    initializeSafe();
+  }, [user, web3Auth, router, addresses]);
 
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope);
@@ -33,10 +75,25 @@ export default function Home() {
   }, [isInView]);
 
   async function initWallet() {
-    if (!web3Auth) return;
+    await signIn();
+  }
 
-    const signInData = await web3Auth.signIn();
-    if (signInData) router.replace("/app");
+  if (isInitializingSafe) {
+    return (
+      <Container>
+        <Stack justify="flex-end" h="100vh" pb="xl">
+          <Title
+            id="anim-title"
+            variant="gradient"
+            weight={700}
+            size={rem(62)}
+            style={{ opacity: 0, transform: "translateY(20px)" }}
+          >
+            Creating your new account...
+          </Title>
+        </Stack>
+      </Container>
+    );
   }
 
   return (

@@ -11,6 +11,9 @@ dependencies:
   '@emotion/server':
     specifier: ^11.11.0
     version: 11.11.0
+  '@ethersproject/providers':
+    specifier: ^5.7.2
+    version: 5.7.2
   '@mantine/core':
     specifier: ^6.0.17
     version: 6.0.17(@emotion/react@11.11.1)(@mantine/hooks@6.0.17)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
@@ -26,9 +29,30 @@ dependencies:
   '@mantine/spotlight':
     specifier: ^6.0.17
     version: 6.0.17(@mantine/core@6.0.17)(@mantine/hooks@6.0.17)(react-dom@18.2.0)(react@18.2.0)
+  '@monerium/sdk':
+    specifier: ^2.6.0
+    version: 2.6.0
+  '@safe-global/account-abstraction-kit-poc':
+    specifier: ^1.2.0
+    version: 1.2.0
+  '@safe-global/api-kit':
+    specifier: ^1.3.0
+    version: 1.3.0
   '@safe-global/auth-kit':
     specifier: ^1.2.0
     version: 1.2.0(@babel/runtime@7.22.6)(@solana/web3.js@1.78.0)(@walletconnect/types@2.9.1)(react-dom@18.2.0)(react@18.2.0)
+  '@safe-global/onramp-kit':
+    specifier: ^1.3.0
+    version: 1.3.0
+  '@safe-global/protocol-kit':
+    specifier: ^1.2.0
+    version: 1.2.0
+  '@safe-global/relay-kit':
+    specifier: ^1.2.0
+    version: 1.2.0
+  '@safe-global/safe-core-sdk-types':
+    specifier: ^2.2.0
+    version: 2.2.0
   '@tabler/icons-react':
     specifier: ^2.28.0
     version: 2.28.0(react@18.2.0)
@@ -56,12 +80,18 @@ dependencies:
   '@web3auth/openlogin-adapter':
     specifier: ^6.1.4
     version: 6.1.4(@babel/runtime@7.22.6)(@solana/web3.js@1.78.0)
+  dotenv:
+    specifier: ^16.3.1
+    version: 16.3.1
   eslint:
     specifier: 8.45.0
     version: 8.45.0
   eslint-config-next:
     specifier: 13.4.11
     version: 13.4.11(eslint@8.45.0)(typescript@5.1.6)
+  ethers:
+    specifier: 5.7.2
+    version: 5.7.2
   framer-motion:
     specifier: ^10.13.0
     version: 10.13.0(react-dom@18.2.0)(react@18.2.0)
@@ -682,6 +712,17 @@ packages:
       tabbable: 6.2.0
     dev: false
 
+  /@gelatonetwork/relay-sdk@3.5.0:
+    resolution: {integrity: sha512-oj4rFH09yzFT4wnYCv7V3bZCIVhpuKbnK5jv0fgzclxTbbA6UEWZErn3QiD13yspiIkKafSgMWT0G8z41CINYg==}
+    dependencies:
+      axios: 0.24.0
+      ethers: 5.7.2
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - utf-8-validate
+    dev: false
+
   /@humanwhocodes/config-array@0.11.10:
     resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}
     engines: {node: '>=10.10.0'}
@@ -879,6 +920,11 @@ packages:
       superstruct: 1.0.3
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@monerium/sdk@2.6.0:
+    resolution: {integrity: sha512-NTvMks6M7HQNdFAQnfu5wVudr2Oxxa+vq0K8gTc4G4g7Sz/DIXYINclIzGQCnAJ7WVUwCmu0wM1Cnl8nWDi/7g==}
+    engines: {node: '>= 16.15'}
     dev: false
 
   /@next/env@13.4.11:
@@ -1132,6 +1178,22 @@ packages:
     resolution: {integrity: sha512-V+MvGwaHH03hYhY+k6Ef/xKd6RYlc4q8WBx+2ANmipHJcKuktNcI/NgEsJgdSUF6Lw32njT6OnrRsKYCdgHjYw==}
     dev: false
 
+  /@safe-global/account-abstraction-kit-poc@1.2.0:
+    resolution: {integrity: sha512-mrmHLSZpH0s6dL5mTwpYtz89t21unvMIlP8zWVrwOda7DaWDxrbloAp7iYeO/Mf6nsyB/n9K5PSQSvvOiFxMjA==}
+    dependencies:
+      '@safe-global/protocol-kit': 1.2.0
+      '@safe-global/relay-kit': 1.2.0
+      '@safe-global/safe-core-sdk-types': 2.2.0
+      ethereumjs-util: 7.1.5
+      ethers: 5.7.2
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - encoding
+      - supports-color
+      - utf-8-validate
+    dev: false
+
   /@safe-global/api-kit@1.3.0:
     resolution: {integrity: sha512-3fdvoBtgufzmqmoBHir7vbS5N2t9Yc4kTeIJmAgmAGl8rHAy3z1bSv5uoEHYSMow34q1Am1aUar6vVAwwkIXhg==}
     dependencies:
@@ -1167,6 +1229,23 @@ packages:
       - utf-8-validate
     dev: false
 
+  /@safe-global/onramp-kit@1.3.0:
+    resolution: {integrity: sha512-yxyTrh7JMJogVrUd942EuGrJLyUc9Q1V0XoOkzeQYf874pubiglQ+pTi6D6+DfeHUAMLm9aHYAnTmSOenHo8DA==}
+    dependencies:
+      '@monerium/sdk': 2.6.0
+      '@safe-global/api-kit': 1.3.0
+      '@safe-global/protocol-kit': 1.2.0
+      '@safe-global/safe-core-sdk-types': 2.2.0
+      '@stripe/crypto': 0.0.4(@stripe/stripe-js@1.54.1)
+      '@stripe/stripe-js': 1.54.1
+      ethers: 5.7.2
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+    dev: false
+
   /@safe-global/protocol-kit@1.2.0:
     resolution: {integrity: sha512-drU2uK30AZ4tqI/9ER7PGMD/lZp/5B9T02t+noTk7WF9Xb7HxskJd8GNU01KE55oyH31Y0AfXaE68H/f9lYa4A==}
     dependencies:
@@ -1181,6 +1260,21 @@ packages:
       web3-utils: 1.10.0
     transitivePeerDependencies:
       - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  /@safe-global/relay-kit@1.2.0:
+    resolution: {integrity: sha512-x2LlAwMUPBZS2SA2qU1kv7dyvQKzQaqFSyIHwy7bVzwbeV79/YhOzc8fb2rVT889hRDAUnzOg98da47wFFYfBw==}
+    dependencies:
+      '@gelatonetwork/relay-sdk': 3.5.0
+      '@safe-global/protocol-kit': 1.2.0
+      '@safe-global/safe-core-sdk-types': 2.2.0
+      ethers: 5.7.2
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
       - encoding
       - supports-color
       - utf-8-validate
@@ -1379,6 +1473,18 @@ packages:
       '@stablelib/keyagreement': 1.0.1
       '@stablelib/random': 1.0.2
       '@stablelib/wipe': 1.0.1
+    dev: false
+
+  /@stripe/crypto@0.0.4(@stripe/stripe-js@1.54.1):
+    resolution: {integrity: sha512-gcD/aG0N90ZrNVppWYf9ADPECptw6PVtF67VIeaFP7fhgd2NvNx8erkzlcvk3VIVSY+bZ6YGX7c7cASoySX74Q==}
+    peerDependencies:
+      '@stripe/stripe-js': ^1.46.0
+    dependencies:
+      '@stripe/stripe-js': 1.54.1
+    dev: false
+
+  /@stripe/stripe-js@1.54.1:
+    resolution: {integrity: sha512-smEXPu1GKMcAj9g2luT16+oXfg2jAwyc68t2Dm5wdtYl3p8PqQaZEiI8tQmboaQAjgF8pIGma6byz1T1vgmpbA==}
     dev: false
 
   /@swc/helpers@0.5.1:
@@ -3202,6 +3308,14 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
+  /axios@0.24.0:
+    resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
+    dependencies:
+      follow-redirects: 1.15.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axobject-query@3.2.1:
     resolution: {integrity: sha512-jsyHu61e6N4Vbz/v18DHwWYKK0bSWLqn47eeDSKPB7m8tqMHF9YJ+mhIk2lVteyZrY8tnSj/jHOv4YiTCuCJgg==}
     dependencies:
@@ -3538,7 +3652,7 @@ packages:
     resolution: {integrity: sha512-Kkht5ye6ZGmwv40uUDZztayT2ThLQGfnj/T71N/XzeZeo3nf8foyW7zGTsPYkEya3m5f3cAypH+qe7YOrM1U2Q==}
     dependencies:
       inherits: 2.0.4
-      safe-buffer: 5.1.2
+      safe-buffer: 5.2.1
     dev: false
 
   /class-is@1.1.0:
@@ -3923,6 +4037,11 @@ packages:
       dom-serializer: 1.4.1
       domelementtype: 2.3.0
       domhandler: 4.3.1
+    dev: false
+
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+    engines: {node: '>=12'}
     dev: false
 
   /duplexer2@0.1.4:
@@ -4475,7 +4594,7 @@ packages:
       keccak: 3.0.3
       pbkdf2: 3.1.2
       randombytes: 2.1.0
-      safe-buffer: 5.1.2
+      safe-buffer: 5.2.1
       scrypt-js: 3.0.1
       secp256k1: 4.0.3
       setimmediate: 1.0.5
@@ -4771,6 +4890,16 @@ packages:
 
   /flatted@3.2.7:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
+    dev: false
+
+  /follow-redirects@1.15.2:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: false
 
   /for-each@0.3.3:
@@ -5768,7 +5897,7 @@ packages:
     dependencies:
       hash-base: 3.1.0
       inherits: 2.0.4
-      safe-buffer: 5.1.2
+      safe-buffer: 5.2.1
     dev: false
 
   /media-typer@0.3.0:
@@ -6478,7 +6607,7 @@ packages:
   /randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
     dependencies:
-      safe-buffer: 5.1.2
+      safe-buffer: 5.2.1
     dev: false
 
   /range-parser@1.2.1:
@@ -6968,7 +7097,7 @@ packages:
     hasBin: true
     dependencies:
       inherits: 2.0.4
-      safe-buffer: 5.1.2
+      safe-buffer: 5.2.1
     dev: false
 
   /shebang-command@2.0.0:

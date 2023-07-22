@@ -2,6 +2,7 @@ import { Web3AuthModalPack, Web3AuthConfig } from "@safe-global/auth-kit";
 import { Web3AuthOptions } from "@web3auth/modal";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+import chain from "@/utils/chains";
 
 const clientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID;
 if (!clientId) {
@@ -9,12 +10,12 @@ if (!clientId) {
 }
 
 const chainConfig = {
-  chainId: "0x5",
-  rpcTarget: `https://rpc.ankr.com/eth_goerli`,
-  displayName: "goerli",
-  blockExplorer: "https://goerli.etherscan.io/",
-  ticker: "ETH",
-  tickerName: "Ethereum",
+  chainId: chain.chainId.toString(16),
+  rpcTarget: chain.rpc[0],
+  displayName: chain.name,
+  blockExplorer: chain.explorers[0].url,
+  ticker: chain.nativeCurrency.symbol,
+  tickerName: chain.nativeCurrency.name,
 };
 
 // https://web3auth.io/docs/sdk/pnp/web/modal/initialize#arguments
@@ -24,8 +25,8 @@ const options: Web3AuthOptions = {
   authMode: "DAPP",
   chainConfig: {
     chainNamespace: "eip155",
-    chainId: "0x5",
-    rpcTarget: "https://rpc.ankr.com/eth_goerli",
+    chainId: chain.chainId.toString(16),
+    rpcTarget: chain.rpc[0],
   },
   uiConfig: {
     theme: "light",
@@ -72,10 +73,8 @@ const openloginAdapter = new OpenloginAdapter({
   },
 });
 
-export const txServiceUrl = "https://safe-transaction-goerli.safe.global";
-
 export const web3AuthConfig: Web3AuthConfig = {
-  txServiceUrl,
+  txServiceUrl: chain.txServiceUrl,
 };
 
 export async function getWeb3Auth() {
