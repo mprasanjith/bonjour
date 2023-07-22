@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   createStyles,
   Container,
@@ -13,14 +13,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
-  IconLogout,
-  IconHeart,
-  IconStar,
-  IconMessage,
-  IconSettings,
-  IconPlayerPause,
   IconTrash,
-  IconSwitchHorizontal,
   IconChevronDown,
 } from "@tabler/icons-react";
 import { useWeb3Auth } from "@/providers/Web3AuthProvider";
@@ -86,7 +79,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const AppNavigation: React.FC = () => {
-  const { signOut, user } = useWeb3Auth();
+  const { signOut, auth } = useWeb3Auth();
   const router = useRouter();
   const tabs = ["Home", "Explore", "Notifications", "Messages"];
 
@@ -98,6 +91,17 @@ export const AppNavigation: React.FC = () => {
     signOut();
     router.push("/");
   };
+
+  const [user, setUser] = useState<any>(null);
+  useEffect(() => {
+    async function getUser() {
+      await auth?.getUserInfo().then((user) => setUser(user));
+    }
+
+    getUser();
+  }, [auth]);
+
+  console.log(user);
 
   const items = tabs.map((tab) => (
     <Tabs.Tab value={tab} key={tab}>

@@ -4,11 +4,14 @@ import { PropsWithChildren, useEffect } from "react";
 
 const AuthOnlyLayout: React.FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter();
-  const { web3Auth } = useWeb3Auth();
+  const { auth } = useWeb3Auth();
 
   useEffect(() => {
-    web3Auth?.getUserInfo().catch(() => router.replace("/onboard"));
-  }, [web3Auth, router]);
+    if (!auth) {
+      router.replace("/onboard");
+    }
+    auth?.getUserInfo().catch(() => router.replace("/onboard"));
+  }, [auth, router]);
 
   return children;
 };
