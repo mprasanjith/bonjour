@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@airstack/airstack-react':
+    specifier: ^0.4.5
+    version: 0.4.5(react-dom@18.2.0)(react@18.2.0)
   '@emotion/react':
     specifier: ^11.11.1
     version: 11.11.1(@types/react@18.2.15)(react@18.2.0)
@@ -113,6 +116,17 @@ packages:
   /@aashutoshrathi/word-wrap@1.2.6:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /@airstack/airstack-react@0.4.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mH6mglAHCX26dGqnozE9hNPJRNuAYclF5hnQIuJYZYeofFxleA5EpdTpXxV8HTrK9ZUi/WIyxPyR2aaTOpPdvQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      graphql: 16.6.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /@babel/code-frame@7.22.5:
@@ -5167,6 +5181,11 @@ packages:
 
   /graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
+    dev: false
+
+  /graphql@16.6.0:
+    resolution: {integrity: sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw==}
+    engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
     dev: false
 
   /har-schema@2.0.0:

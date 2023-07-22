@@ -83,13 +83,15 @@ export default function Home() {
             </Title>
           )}
 
-          <Stack align="flex-start" py="xl">
-            <Link href="/app">
-              <Button variant="outline" size="xl">
-                Continue
-              </Button>
-            </Link>
-          </Stack>
+          {safeAddress && (
+            <Stack align="flex-start" py="xl">
+              <Link href="/app">
+                <Button variant="outline" size="xl">
+                  Continue
+                </Button>
+              </Link>
+            </Stack>
+          )}
         </Stack>
       </Container>
     );

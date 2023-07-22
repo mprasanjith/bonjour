@@ -96,12 +96,14 @@ export const Web3AuthContextProvider: React.FC<PropsWithChildren> = ({
 };
 
 export const useWeb3Auth = () => {
-  const {
+  const { web3Auth, signIn, addresses, signOut, user } =
+    useContext(Web3AuthContext);
+  return {
     web3Auth,
     signIn,
     addresses,
     signOut,
     user,
-  } = useContext(Web3AuthContext);
-  return { web3Auth, signIn, addresses, signOut, user };
+    safeAddress: addresses?.safes?.[0] ?? null,
+  };
 };

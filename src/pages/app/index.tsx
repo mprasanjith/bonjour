@@ -1,3 +1,4 @@
+import WalletBalance from "@/components/WalletBalance";
 import { AppNavigation } from "@/layouts/AppNavigation";
 import AuthOnlyLayout from "@/layouts/AuthOnlyLayout";
 import { Container } from "@mantine/core";
@@ -7,7 +8,7 @@ const App = () => {
     <AuthOnlyLayout>
       <AppNavigation />
       <Container>
-        <h1>App</h1>
+        <WalletBalance />
       </Container>
     </AuthOnlyLayout>
   );
