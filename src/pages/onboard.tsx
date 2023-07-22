@@ -1,52 +1,21 @@
 import { useWeb3Auth } from "@/providers/Web3AuthProvider";
 import { Button, Container, Stack, Title, rem } from "@mantine/core";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAnimate, useInView } from "framer-motion";
-import { getEthAdapter } from "@/lib/safeEthersAdapter";
-import { predictSafeAddress } from "@/lib/safeFactory";
-import { ethers } from "ethers";
-import { getSafeAA } from "@/lib/safeAA";
 import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
-  const { user, addresses, web3Auth, signIn } = useWeb3Auth();
-  const [isInitializingSafe, setIsInitializingSafe] = useState(false);
-  const [safeAddress, setSafeAddress] = useState("");
+  const { auth, signIn, smartAccount, loading } = useWeb3Auth();
 
   useEffect(() => {
-    if (!user) return;
-
-    if (addresses?.safes?.length) {
+    if (!auth?.provider) return;
+    if (smartAccount) {
       router.replace("/fund");
       return;
     }
-
-    async function initializeSafe() {
-      setIsInitializingSafe(true);
-      const web3AuthProvider = web3Auth?.getProvider();
-      if (!web3AuthProvider) {
-        throw new Error("No provider found");
-      }
-
-      const web3Provider = new ethers.providers.Web3Provider(web3AuthProvider);
-      const signer = web3Provider.getSigner();
-
-      const safeAA = await getSafeAA(signer);
-      const predictedSafeAddress = await safeAA.getSafeAddress();
-      console.log({ predictedSafeAddress });
-
-      const isSafeDeployed = await safeAA.isSafeDeployed();
-      console.log({ isSafeDeployed });
-
-      const ethAdapter = getEthAdapter(signer);
-      const safeAddress = await predictSafeAddress(ethAdapter);
-      setSafeAddress(safeAddress);
-    }
-
-    initializeSafe();
-  }, [user, web3Auth, router, addresses]);
+  }, [router, auth, smartAccount, signIn]);
 
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope);
@@ -64,26 +33,26 @@ export default function Home() {
   }, [isInView]);
 
   async function initWallet() {
-    await signIn();
+    signIn();
   }
 
-  if (isInitializingSafe) {
+  if (loading) {
     return (
       <Container>
         <Stack justify="flex-end" h="100vh" pb="xl">
           <Title variant="gradient" weight={700} size={rem(62)}>
-            {safeAddress
+            {smartAccount
               ? `Let's get you funded.`
               : "Creating your new account..."}
           </Title>
-          {safeAddress && (
+          {smartAccount && (
             <Title weight={300}>
-              Send funds to {safeAddress}. We would have an easy way to fund
-              your wallet in the future.
+              Send funds. We would have an easy way to fund your wallet in the
+              future.
             </Title>
           )}
 
-          {safeAddress && (
+          {smartAccount && (
             <Stack align="flex-start" py="xl">
               <Link href="/app">
                 <Button variant="outline" size="xl">

@@ -1,7 +1,15 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
-import { Web3AuthContextProvider } from "@/providers/Web3AuthProvider";
+// import { Web3AuthContextProvider } from "@/providers/Web3AuthProvider";
+import dynamic from "next/dynamic";
+
+const Web3AuthContextProvider = dynamic(
+  () => import("@/providers/Web3AuthProvider").then((res) => res.Web3AuthContextProvider),
+  {
+    ssr: false,
+  }
+);
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;

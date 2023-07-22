@@ -1,4 +1,4 @@
-const chain = {
+const goerli = {
   name: "Goerli",
   title: "Ethereum Testnet Goerli",
   chain: "ETH",
@@ -33,5 +33,37 @@ const chain = {
   ],
   txServiceUrl: "https://safe-transaction-goerli.safe.global"
 };
+
+const polygon = {
+  name: "Polygon",
+  title: "Polygon",
+  chain: "MATIC",
+  rpc: [
+    "https://rpc-mainnet.maticvigil.com",
+    "https://rpc-mainnet.matic.network",
+    "https://matic-mainnet.chainstacklabs.com",
+    "https://rpc-mainnet.matic.quiknode.pro"
+  ],
+  faucets: [],
+  nativeCurrency: {
+    name: "Matic",
+    symbol: "MATIC",
+    decimals: 18
+  },
+  infoURL: "https://docs.matic.network/docs/develop/network-details/network",
+  shortName: "matic",
+  chainId: 137,
+  networkId: 137,
+  explorers: [
+    {
+      name: "polygonscan",
+      url: "https://polygonscan.com",
+      standard: "EIP3091"
+    },
+  ],
+  txServiceUrl: "https://safe-transaction-polygon.safe.global"
+}
+
+const chain = polygon;
 
 export default chain;
