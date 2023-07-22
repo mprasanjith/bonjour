@@ -4,17 +4,16 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAnimate, useInView } from "framer-motion";
 import { getEthAdapter } from "@/lib/safeEthersAdapter";
-import { SafeFactory } from "@safe-global/protocol-kit";
-import { deploySafe, predictSafeAddress } from "@/lib/safeFactory";
-import AccountAbstraction from "@safe-global/account-abstraction-kit-poc";
+import { predictSafeAddress } from "@/lib/safeFactory";
 import { ethers } from "ethers";
-import relayKit from "@/lib/gelatoRelay";
 import { getSafeAA } from "@/lib/safeAA";
+import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
   const { user, addresses, web3Auth, signIn } = useWeb3Auth();
   const [isInitializingSafe, setIsInitializingSafe] = useState(false);
+  const [safeAddress, setSafeAddress] = useState("");
 
   useEffect(() => {
     if (!user) return;
@@ -25,7 +24,7 @@ export default function Home() {
     }
 
     async function initializeSafe() {
-      console.log("initializeSafe", web3Auth);
+      setIsInitializingSafe(true);
       const web3AuthProvider = web3Auth?.getProvider();
       if (!web3AuthProvider) {
         throw new Error("No provider found");
@@ -43,17 +42,7 @@ export default function Home() {
 
       const ethAdapter = getEthAdapter(signer);
       const safeAddress = await predictSafeAddress(ethAdapter);
-      console.log("safe", safeAddress);
-
-      // setIsInitializingSafe(true);
-      // const provider = web3Auth?.getProvider();
-      // console.log("provider", provider);
-      // if (!provider) {
-      //   throw new Error("No provider found");
-      // }
-      // await deploySafe(ethersAdapter);
-
-      // setIsInitializingSafe(false);
+      setSafeAddress(safeAddress);
     }
 
     initializeSafe();
@@ -82,15 +71,25 @@ export default function Home() {
     return (
       <Container>
         <Stack justify="flex-end" h="100vh" pb="xl">
-          <Title
-            id="anim-title"
-            variant="gradient"
-            weight={700}
-            size={rem(62)}
-            style={{ opacity: 0, transform: "translateY(20px)" }}
-          >
-            Creating your new account...
+          <Title variant="gradient" weight={700} size={rem(62)}>
+            {safeAddress
+              ? `Let's get you funded.`
+              : "Creating your new account..."}
           </Title>
+          {safeAddress && (
+            <Title weight={300}>
+              Send funds to {safeAddress}. We would have an easy way to fund
+              your wallet in the future.
+            </Title>
+          )}
+
+          <Stack align="flex-start" py="xl">
+            <Link href="/app">
+              <Button variant="outline" size="xl">
+                Continue
+              </Button>
+            </Link>
+          </Stack>
         </Stack>
       </Container>
     );
